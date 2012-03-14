@@ -1,7 +1,25 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Rubychan" do
-  it "has a spec" do
-    true.should be_true
+  before :each do
+    @runner = RubyChan::Runner.new
+    @scraper = mock("Scraper").as_null_object
+    RubyChan::Scraper.stub!(:new).and_return(@scraper)
+    @uri = "http://4chan.org"
+  end
+
+  context "#scrape" do
+
+    it "should scrape a URI" do
+      @scraper.should_receive(:scrape)
+      @runner.scrape(@uri)
+    end
+
+    it "should print HTML" do
+      @html = "HTML!"
+      @scraper.should_receive(:html).and_return(@html)
+      @runner.should_receive(:puts).with(@html)
+      @runner.scrape(@uri)
+    end
   end
 end

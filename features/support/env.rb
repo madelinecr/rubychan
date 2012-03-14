@@ -7,6 +7,9 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+STDOUT = $stdout = StringIO.new
+STDERR = $stderr = StringIO.new
+
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../lib')
 require 'rubychan'
 
