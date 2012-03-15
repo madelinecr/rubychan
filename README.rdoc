@@ -1,6 +1,6 @@
 = rubychan
 
-Description goes here.
+RubyChan is a command line tool and library for scraping 4Chan threads.
 
 == Contributing to rubychan
  
