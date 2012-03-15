@@ -1,9 +1,19 @@
 require 'spec_helper'
+require 'fakeweb'
 
 describe RubyChan::Scraper do
 
   before :each do
     @uri = "http://4chan.org"
+    @html = <<-eos
+      <html>
+        <body>
+          <a href="http://images.4chan.org/a/src/1.jpg"></a>
+          <a href="http://images.4chan.org/b/src/2.jpg"></a>
+        </body>
+      </html>
+    eos
+    FakeWeb.register_uri(:get, "http://4chan.org", :body => @html)
     @scraper = RubyChan::Scraper.new(@uri)
   end
 
@@ -12,8 +22,8 @@ describe RubyChan::Scraper do
     @scraper.scrape
   end
 
-  it "should return output" do
+  it "should extract image URIs from the page source" do
     @scraper.scrape
-    STDOUT.should_not be_nil
+    @scraper.imagelinks.should =~ /http:\/\/images.4chan.org\/.\/src\/.+/
   end
 end

@@ -1,3 +1,4 @@
+require 'fakeweb'
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
