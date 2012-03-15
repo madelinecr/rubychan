@@ -7,6 +7,6 @@ When /^I call scrape$/ do
   @runner.scrape(@uri)
 end
 
-Then /^HTML should be returned$/ do
+Then /^I should see output$/ do
   STDOUT.should_not be_nil
 end

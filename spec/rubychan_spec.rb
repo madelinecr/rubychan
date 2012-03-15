@@ -15,11 +15,9 @@ describe "Rubychan" do
       @runner.scrape(@uri)
     end
 
-    it "should print HTML" do
-      @html = "HTML!"
-      @scraper.should_receive(:html).and_return(@html)
-      @runner.should_receive(:puts).with(@html)
+    it "should print stuff" do
       @runner.scrape(@uri)
+      STDOUT.should_not be_nil
     end
   end
 end

@@ -9,7 +9,6 @@ module RubyChan
     def scrape(uri)
       @scraper = RubyChan::Scraper.new(uri)
       @scraper.scrape
-      puts @scraper.html
     end
   end
 end

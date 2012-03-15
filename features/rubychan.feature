@@ -5,4 +5,4 @@ Feature: Scraping 4chan
   Scenario: Scraping a URI
     Given a URI
     When I call scrape
-    Then HTML should be returned
+    Then I should see output

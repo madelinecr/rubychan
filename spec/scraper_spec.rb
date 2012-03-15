@@ -12,8 +12,8 @@ describe RubyChan::Scraper do
     @scraper.scrape
   end
 
-  it "should return HTML" do
+  it "should return output" do
     @scraper.scrape
-    @scraper.html.should_not be_nil
+    STDOUT.should_not be_nil
   end
 end
