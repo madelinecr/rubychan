@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/sensae/rubychan"
   gem.license = "MIT"
   gem.summary = %Q{4Chan Scraping Toolkit}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.description = %Q{A script and library for scraping 4chan threads}
   gem.email = "blainepace@gmail.com"
   gem.authors = ["Blaine Pace"]
   # dependencies defined in Gemfile
