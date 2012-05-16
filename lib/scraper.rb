@@ -4,8 +4,6 @@ require 'nokogiri'
 module RubyChan
   class Scraper
 
-    attr_accessor :imagelinks
-
     def initialize(uri)
       @uri = uri
     end
