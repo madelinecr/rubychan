@@ -11,7 +11,7 @@ module RubyChan
     def scrape
       doc = Nokogiri::HTML(open(@uri))
       doc.xpath('//a').each do |link|
-        if(link['href'] =~ /\/\/images.4chan.org\/.\/src\/\d+\..../)
+        if(link['href'] =~ /\/\/images.4chan.org\/.+\/src\/\d+\..../)
           uri = URI(link['href'])
           puts "Downloading #{uri}"
           Net::HTTP.start(uri.host) do |http|
