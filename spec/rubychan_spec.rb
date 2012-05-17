@@ -14,12 +14,5 @@ describe "Rubychan" do
       @scraper.should_receive(:scrape)
       @runner.scrape(@uri)
     end
-
-    it "should print imagelinks" do
-      @imagelinks = "Image Links!"
-      @scraper.stub!(:imagelinks).and_return(@imagelinks)
-      STDOUT.should_receive(:puts).with(@imagelinks)
-      @runner.scrape(@uri)
-    end
   end
 end
