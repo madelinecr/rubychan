@@ -24,9 +24,9 @@ module RubyChan
     private
 
     def parse_page
-     doc = Nokogiri::HTML(open(@uri))
-     doc.xpath('//a').each do |link|
-        if(link['href'] =~ /\/\/images.4chan.org\/.+\/src\/\d+\..../)
+      doc = Nokogiri::HTML(open(@uri))
+      doc.xpath('//a').each do |link|
+        if(link['href'] =~ /\/\/i.4cdn.org\/.+\/\d+\..../)
           uri = URI(link['href'])
           # Mark image as not downloaded yet in hash
           unless @images.has_key?(uri)
