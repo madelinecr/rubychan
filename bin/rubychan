@@ -6,10 +6,11 @@ require 'scraper'
 module RubyChan
   class Runner < Thor
 
-    desc "Scrape URL", "Scrape a 4chan URL"
+    option :dryrun, :type => :boolean
+    desc "scrape URL", "scrape a 4chan URL"
     def scrape(uri)
       @scraper = RubyChan::Scraper.new(uri)
-      @scraper.scrape
+      @scraper.scrape(options)
     end
   end
 end

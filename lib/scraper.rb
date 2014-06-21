@@ -9,7 +9,12 @@ module RubyChan
       @images = Hash[]
     end
 
-    def scrape
+    def scrape(options)
+      @options = options
+      puts options
+      if options[:dryrun]
+        puts "Dry run, pretending to download files..."
+      end
       loop do
         begin
           parse_page
@@ -27,7 +32,7 @@ module RubyChan
       doc = Nokogiri::HTML(open(@uri))
       doc.xpath('//a').each do |link|
         if(link['href'] =~ /\/\/i.4cdn.org\/.+\/\d+\..../)
-          uri = URI(link['href'])
+          uri = URI.parse("http:#{link['href']}")
           # Mark image as not downloaded yet in hash
           unless @images.has_key?(uri)
             @images[uri] = false
@@ -39,11 +44,8 @@ module RubyChan
     def download
       @images.each_key do |image|
         if @images[image] == false
-          Net::HTTP.start(image.host) do |http|
-            resp = http.get(image.path)
-            open(File.basename(image.path), "wb") do |file|
-              file.write(resp.body)
-            end
+          unless @options[:dryrun]
+            open(File.basename(image.path), "wb") {|f| f.write(image.read) }
           end
           puts "Downloaded #{image} to disk."
           # Mark image as downloaded so it isn't downloaded again in 
