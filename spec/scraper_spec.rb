@@ -8,8 +8,8 @@ describe RubyChan::Scraper do
     @html = <<-eos
       <html>
         <body>
-          <a href="//images.4chan.org/a/src/1.jpg"></a>
-          <a href="//images.4chan.org/b/src/2.jpg"></a>
+          <a href="//i.4cdn.org/a/src/1.jpg"></a>
+          <a href="//i.4cdn.org/b/src/2.jpg"></a>
         </body>
       </html>
     eos
@@ -19,11 +19,11 @@ describe RubyChan::Scraper do
 
   it "should open a URI" do
     @scraper.should_receive(:open).with(@uri)
-    @scraper.scrape
+    @scraper.scrape({ :singlerun => true })
   end
 
   it "should download image URIs from the page source" do
-    Net::HTTP.should_receive(:start).twice
     @scraper.scrape
+    @scraper.images.size.should == 2
   end
 end

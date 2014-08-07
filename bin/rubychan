@@ -7,6 +7,7 @@ module RubyChan
   class Runner < Thor
 
     option :dryrun, :type => :boolean
+    option :singlerun, :type => :boolean
     desc "scrape URL", "scrape a 4chan URL"
     def scrape(uri)
       @scraper = RubyChan::Scraper.new(uri)

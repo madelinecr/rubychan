@@ -4,14 +4,15 @@ require 'nokogiri'
 module RubyChan
   class Scraper
 
+    attr_accessor :images
+
     def initialize(uri)
       @uri = uri
       @images = Hash[]
     end
 
-    def scrape(options)
+    def scrape(options={})
       @options = options
-      puts options
       if options[:dryrun]
         puts "Dry run, pretending to download files..."
       end
@@ -19,6 +20,9 @@ module RubyChan
         begin
           parse_page
           download
+          if options[:singlerun]
+            break
+          end
         rescue OpenURI::HTTPError
           puts "Error, thread has 404'd"
           break
